@@ -20,14 +20,27 @@ export default {
   },
   data () {
     return {
-      todos: [
-        {id: Date.now(), title: 'A', complete: false},
-        {id: Date.now() + 1, title: 'B', complete: true},
-        {id: Date.now() + 2, title: 'C', complete: false},
-        {id: Date.now() + 3, title: 'D', complete: false}
-      ]
+      todos: []
     }
   },
+  mounted() {
+    // 模拟异步读取数据
+    setTimeout(() => {
+      const todos = JSON.parse(localStorage.getItem("todos") || '[]')
+      this.todos = todos
+    }, 1000)
+  },
+
+  watch: {
+    todos: {
+      deep: true,
+      handler (val) {
+        debugger
+        localStorage.setItem('todos', JSON.stringify(val))
+      }
+    }
+  },
+
   methods: {
     // 添加 todo
     addTodo (todo) {
