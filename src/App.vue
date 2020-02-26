@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Todo List</h1>
     <Header :addTodo="addTodo"/>
-    <List :todos="todos" :delTodo="delTodo"/>
+    <List :todos="todos" :delTodo="delTodo" :toggleTodo="toggleTodo"/>
     <Footer :todos="todos" :checkAllTodo="checkAllTodo" :clearTodos="clearTodos"/>
   </div>
 </template>
@@ -35,7 +35,6 @@ export default {
     todos: {
       deep: true,
       handler (val) {
-        debugger
         localStorage.setItem('todos', JSON.stringify(val))
       }
     }
@@ -57,6 +56,10 @@ export default {
     // 清除已完成 todo
     clearTodos () {
       this.todos = this.todos.filter(todo => !todo.complete)
+    },
+    // 切换 todo 是否完成
+    toggleTodo (todo) {
+      todo.complete = !todo.complete
     }
   },
 }

@@ -3,7 +3,7 @@
       @mouseenter="handleEnter(true)"
       @mouseleave="handleEnter(false)">
     <label>
-      <input type="checkbox" v-model="todo.complete">
+      <input type="checkbox" v-model="complete">
       <span>{{ todo.title }}</span>
     </label>
     <button v-show="isShow" @click="deleteItem">删除</button>
@@ -17,7 +17,8 @@ export default {
   props: {
     todo: Object,
     index: Number,
-    delTodo: Function
+    delTodo: Function,
+    toggleTodo: Function
   },
   data () {
     return {
@@ -26,7 +27,16 @@ export default {
     }
   },
   computed: {
-
+    // 是否勾选
+    complete: {
+      get () {
+        return this.todo.complete
+      },
+      set (val) {
+        console.log("set ", val)
+        this.toggleTodo(this.todo)
+      }
+    }
   },
   methods: {
     handleEnter (isEnter) {
