@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Todo List</h1>
-    <Header @addTodo="addTodo"/>
+    <Header ref="header"/>
     <List :todos="todos" :delTodo="delTodo" :toggleTodo="toggleTodo"/>
     <Footer :todos="todos" :checkAllTodo="checkAllTodo" :clearTodos="clearTodos"/>
   </div>
@@ -28,7 +28,10 @@ export default {
     setTimeout(() => {
       const todos = JSON.parse(localStorage.getItem("todos") || '[]')
       this.todos = todos
-    }, 1000)
+    }, 100)
+
+    // 绑定自定义事件监听
+    this.$refs.header.$on('addTodo', this.addTodo)
   },
 
   watch: {
