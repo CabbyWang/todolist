@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Todo List</h1>
     <Header ref="header"/>
-    <List :todos="todos" :delTodo="delTodo" :toggleTodo="toggleTodo"/>
+    <List :todos="todos" :toggleTodo="toggleTodo"/>
     <Footer :todos="todos" :checkAllTodo="checkAllTodo" :clearTodos="clearTodos"/>
   </div>
 </template>
@@ -32,6 +32,14 @@ export default {
 
     // 绑定自定义事件监听
     this.$refs.header.$on('addTodo', this.addTodo)
+
+    // 绑定自定义事件监听(delTodo)
+    this.$vm.$on('delTodo', this.delTodo)
+  },
+
+  beforeDestroy() {
+    this.$vm.$off('delTodo')
+    this.$refs.header.$off('addTodo')
   },
 
   watch: {

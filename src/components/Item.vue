@@ -17,7 +17,6 @@ export default {
   props: {
     todo: Object,
     index: Number,
-    delTodo: Function,
     toggleTodo: Function
   },
   data () {
@@ -50,7 +49,9 @@ export default {
     },
     deleteItem () {
       if (confirm("confirm delete?")){
-        this.delTodo(this.index)
+        // this.delTodo(this.index)
+        // emit event
+        this.$bus.$emit('delTodo', this.index)
       }
     }
   },

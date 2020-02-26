@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <Item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" :delTodo="delTodo"      :toggleTodo="toggleTodo"/>
+    <Item v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" :toggleTodo="toggleTodo"/>
   </ul>
 </template>
 
@@ -11,7 +11,6 @@ export default {
   // 所有接收的标签属性都会成为组件对象的属性
   props: {
     todos: Array,
-    delTodo: Function,
     toggleTodo: Function
   },
   components: {
