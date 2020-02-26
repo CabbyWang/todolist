@@ -6,12 +6,6 @@
 
 <script>
 export default {
-  props: {
-    addTodo: {
-      type: Function,
-      required: true
-    }
-  },
 
   data () {
     return {
@@ -34,7 +28,10 @@ export default {
       }
 
       // 调用 addTodo 来添加 todo
-      this.addTodo(todo)
+      // this.addTodo(todo)
+      // emit event
+      this.$emit('addTodo', todo)
+
       // 清除输出
       this.title = ''
     }
